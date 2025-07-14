@@ -1,0 +1,421 @@
+{
+  "working": [
+    {
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 20,
+      "duration": 152
+    },
+    {
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 226
+    },
+    {
+      "name": "VentureBeat",
+      "url": "https://venturebeat.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 19,
+      "duration": 217
+    },
+    {
+      "name": "Engadget",
+      "url": "https://www.engadget.com/rss.xml",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 50,
+      "duration": 765
+    },
+    {
+      "name": "Hacker News",
+      "url": "https://news.ycombinator.com/rss",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 30,
+      "duration": 736
+    },
+    {
+      "name": "TechCrunch Startups",
+      "url": "https://techcrunch.com/startups/feed/",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 20,
+      "duration": 825
+    },
+    {
+      "name": "Steve Blank",
+      "url": "https://steveblank.com/feed/",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 20,
+      "duration": 174
+    },
+    {
+      "name": "Andrew Chen",
+      "url": "https://andrewchen.co/feed/",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 15,
+      "duration": 1364
+    },
+    {
+      "name": "The Pragmatic Engineer",
+      "url": "https://blog.pragmaticengineer.com/rss/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 15,
+      "duration": 236
+    },
+    {
+      "name": "GitHub Engineering",
+      "url": "https://githubengineering.com/atom.xml",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 494
+    },
+    {
+      "name": "Spotify Engineering",
+      "url": "https://engineering.atspotify.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 5,
+      "duration": 650
+    },
+    {
+      "name": "Meta Engineering",
+      "url": "https://engineering.fb.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 9,
+      "duration": 160
+    },
+    {
+      "name": "Airbnb Engineering",
+      "url": "https://medium.com/feed/airbnb-engineering",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 351
+    },
+    {
+      "name": "Stripe Engineering",
+      "url": "https://stripe.com/blog/feed.rss",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 1569
+    },
+    {
+      "name": "DeepMind",
+      "url": "https://deepmind.com/blog/feed/basic/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 100,
+      "duration": 699
+    },
+    {
+      "name": "The Berkeley AI Research Blog",
+      "url": "https://bair.berkeley.edu/blog/feed.xml",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 1498
+    },
+    {
+      "name": "ML@CMU",
+      "url": "https://blog.ml.cmu.edu/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 1,
+      "duration": 1159
+    },
+    {
+      "name": "Towards Data Science",
+      "url": "https://towardsdatascience.com/feed",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 20,
+      "duration": 549
+    },
+    {
+      "name": "Distill",
+      "url": "https://distill.pub/rss.xml",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 52,
+      "duration": 219
+    },
+    {
+      "name": "UX Planet",
+      "url": "https://uxplanet.org/feed",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 404
+    },
+    {
+      "name": "Nielsen Norman Group",
+      "url": "https://www.nngroup.com/feed/rss/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 20,
+      "duration": 274
+    },
+    {
+      "name": "UX Collective",
+      "url": "https://uxdesign.cc/feed",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 497
+    },
+    {
+      "name": "Smashing Magazine",
+      "url": "https://www.smashingmagazine.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 40,
+      "duration": 341
+    },
+    {
+      "name": "CSS-Tricks",
+      "url": "https://css-tricks.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 15,
+      "duration": 1852
+    },
+    {
+      "name": "Seth Godin",
+      "url": "https://seths.blog/feed/",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 105
+    },
+    {
+      "name": "HubSpot Marketing",
+      "url": "https://blog.hubspot.com/marketing/rss.xml",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 50,
+      "duration": 2331
+    },
+    {
+      "name": "Moz Blog",
+      "url": "https://moz.com/blog/feed",
+      "type": "rss",
+      "category": "business",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 523
+    },
+    {
+      "name": "Farnam Street",
+      "url": "https://fs.blog/feed/",
+      "type": "rss",
+      "category": "personal",
+      "status": "OK",
+      "itemCount": 20,
+      "duration": 203
+    },
+    {
+      "name": "Ness Labs",
+      "url": "https://nesslabs.com/feed",
+      "type": "rss",
+      "category": "personal",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 1113
+    },
+    {
+      "name": "Big Think",
+      "url": "https://bigthink.com/feed/",
+      "type": "rss",
+      "category": "personal",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 195
+    },
+    {
+      "name": "Quanta Magazine",
+      "url": "https://www.quantamagazine.org/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 5,
+      "duration": 632
+    },
+    {
+      "name": "MIT News",
+      "url": "https://news.mit.edu/rss/research",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 50,
+      "duration": 154
+    },
+    {
+      "name": "Nature News",
+      "url": "https://www.nature.com/nature.rss",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 75,
+      "duration": 126
+    },
+    {
+      "name": "ScienceAlert",
+      "url": "https://www.sciencealert.com/rss",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 1136
+    },
+    {
+      "name": "Singularity Hub",
+      "url": "https://singularityhub.com/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "OK",
+      "itemCount": 10,
+      "duration": 509
+    }
+  ],
+  "broken": [
+    {
+      "name": "SlashGear",
+      "url": "https://feeds.slashgear.com/slashgear",
+      "type": "rss",
+      "category": "tech",
+      "status": "ERROR",
+      "error": "getaddrinfo ENOTFOUND feeds.slashgear.com",
+      "errorCode": "ENOTFOUND"
+    },
+    {
+      "name": "First Round Review",
+      "url": "https://firstround.com/review/feed.xml",
+      "type": "rss",
+      "category": "business",
+      "status": "ERROR",
+      "error": "Status code 404",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "Both Sides of the Table",
+      "url": "https://bothsidesofthetable.com/feed",
+      "type": "rss",
+      "category": "business",
+      "status": "ERROR",
+      "error": "unable to verify the first certificate",
+      "errorCode": "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+    },
+    {
+      "name": "Uber Engineering",
+      "url": "https://www.uber.com/blog/engineering/rss/",
+      "type": "rss",
+      "category": "tech",
+      "status": "ERROR",
+      "error": "Status code 404",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "OpenAI Blog",
+      "url": "https://openai.com/blog/rss/",
+      "type": "rss",
+      "category": "tech",
+      "status": "ERROR",
+      "error": "Status code 403",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "Google AI Blog",
+      "url": "https://ai.googleblog.com/feeds/posts/default",
+      "type": "rss",
+      "category": "tech",
+      "status": "ERROR",
+      "error": "Status code 404",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "Airbnb Design",
+      "url": "https://airbnb.design/feed/",
+      "type": "rss",
+      "category": "tech",
+      "status": "ERROR",
+      "error": "Status code 404",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "Content Marketing Institute",
+      "url": "https://contentmarketinginstitute.com/feed/",
+      "type": "rss",
+      "category": "business",
+      "status": "ERROR",
+      "error": "Invalid character in entity name\nLine: 1\nColumn: 389\nChar: &",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "Social Media Examiner",
+      "url": "https://www.socialmediaexaminer.com/feed/",
+      "type": "rss",
+      "category": "business",
+      "status": "ERROR",
+      "error": "Status code 403",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "The Decision Lab",
+      "url": "https://thedecisionlab.com/feed/",
+      "type": "rss",
+      "category": "personal",
+      "status": "ERROR",
+      "error": "Status code 500",
+      "errorCode": "UNKNOWN"
+    },
+    {
+      "name": "Scott H Young",
+      "url": "https://www.scotthyoung.com/feed/",
+      "type": "rss",
+      "category": "personal",
+      "status": "ERROR",
+      "error": "Request timed out after 10000ms",
+      "errorCode": "UNKNOWN"
+    }
+  ],
+  "noContent": []
+}

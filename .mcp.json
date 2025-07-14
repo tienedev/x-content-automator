@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "mastra": {
+      "command": "npx",
+      "args": ["-y", "@mastra/mcp-docs-server@latest"]
+    },
+    "gemini-cli": {
+      "command": "npx",
+      "args": ["-y", "@google/gemini-cli@latest", "mcp"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp-server@latest"]
+    }
+  }
+}
