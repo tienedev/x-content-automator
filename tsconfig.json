@@ -25,21 +25,21 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/renderer/*"],
-      "@/components/*": ["src/renderer/components/*"],
+      "@/components/*": ["src/renderer/components/*", "src/components/*"],
       "@/pages/*": ["src/renderer/pages/*"],
-      "@/hooks/*": ["src/renderer/hooks/*"],
+      "@/hooks/*": ["src/hooks/*"],
       "@/utils/*": ["src/renderer/utils/*"],
+      "@/types": ["src/types/index.ts"],
       "@/types/*": ["src/types/*"],
       "@/services/*": ["src/services/*"],
-      "@/agents/*": ["src/agents/*"]
+      "@/agents/*": ["src/agents/*"],
+      "@/config/*": ["src/config/*"],
+      "@/contexts/*": ["src/contexts/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/main/*": ["src/main/*"],
+      "@/preload/*": ["src/preload/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "dist"]
 }

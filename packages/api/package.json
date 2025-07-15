@@ -1,0 +1,27 @@
+{
+  "name": "@x-community/api",
+  "version": "1.0.0",
+  "description": "Mastra AI backend server",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "mastra build && tsc",
+    "dev": "mastra dev",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist .mastra",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@x-community/shared": "file:../shared",
+    "@ai-sdk/openai": "^1.3.23",
+    "@mastra/core": "^0.10.14",
+    "@mastra/libsql": "^0.11.0",
+    "@mastra/loggers": "^0.10.3",
+    "dotenv": "^17.2.0",
+    "mastra": "^0.10.12",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3"
+  }
+}
