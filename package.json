@@ -15,7 +15,11 @@
     "typecheck": "turbo typecheck",
     "clean": "turbo clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "package:desktop": "turbo build --filter=desktop && cd packages/desktop && npm run package"
+    "package:desktop": "turbo build --filter=desktop && cd packages/desktop && npm run package",
+    "dev:api": "turbo dev --filter=api",
+    "dev:desktop": "turbo dev --filter=desktop",
+    "build:api": "turbo build --filter=api",
+    "build:desktop": "turbo build --filter=desktop"
   },
   "packageManager": "npm@10.0.0",
   "keywords": [],
