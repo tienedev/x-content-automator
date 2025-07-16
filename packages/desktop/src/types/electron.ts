@@ -27,6 +27,15 @@ export interface ElectronAPI {
   // App
   getVersion: () => Promise<string>;
   openExternal: (url: string) => Promise<void>;
+  
+  // Article scraping
+  scrapeArticle: (url: string) => Promise<{
+    title: string;
+    content: string;
+    author?: string;
+    publishedDate?: string;
+    imageUrl?: string;
+  }>;
 
   // Storage operations
   storage: {

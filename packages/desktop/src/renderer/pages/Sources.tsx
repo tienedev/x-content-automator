@@ -5,6 +5,7 @@ import type {
   SourceType,
   FeedCategoryType,
   RSSFeedResult,
+  StoredFeedItem,
 } from '@x-community/shared';
 import { useRSS } from '@/hooks/useRSS';
 import {
@@ -156,8 +157,36 @@ const Sources: React.FC = () => {
     try {
       const results = await fetchSourcesContent(activeSources);
       setFeedResults(results);
-    } catch (error) {
-      console.error('Erreur lors du chargement des flux RSS:', error);
+
+      // Sauvegarder les feed items dans le storage
+      const allFeedItems: StoredFeedItem[] = [];
+
+      for (const [sourceId, result] of results.entries()) {
+        const source = activeSources.find(s => s.id === sourceId);
+        if (!source || result.error) continue;
+
+        // Convertir les items RSS en StoredFeedItem
+        const feedItems: StoredFeedItem[] = result.items.map(item => ({
+          id: `${sourceId}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          sourceId,
+          sourceName: source.name,
+          feedCategory: source.feedCategory,
+          fetchedAt: new Date().toISOString(),
+          isRead: false,
+          ...item,
+        }));
+
+        allFeedItems.push(...feedItems);
+      }
+
+      // Sauvegarder tous les nouveaux items
+      if (allFeedItems.length > 0) {
+        await window.electronAPI.storage.addFeedItems(allFeedItems);
+        console.log(`✅ ${allFeedItems.length} nouveaux articles récupérés`);
+      }
+    } catch (err) {
+      console.error('Erreur lors du chargement des flux RSS:', err);
+      // Pas de toast d'erreur pour ne pas surcharger l'interface
     } finally {
       setLoadingFeeds(false);
     }
@@ -320,7 +349,7 @@ const Sources: React.FC = () => {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
-          <TabsList className='grid w-full grid-cols-3'>
+          <TabsList className='grid w-full grid-cols-3 mb-6'>
             <TabsTrigger value='sources'>Sources ({sources.length})</TabsTrigger>
             <TabsTrigger value='articles'>Tous les articles</TabsTrigger>
             <TabsTrigger value='manage'>Gestion</TabsTrigger>
@@ -338,7 +367,7 @@ const Sources: React.FC = () => {
                 </div>
               </div>
             ) : sources.length === 0 ? (
-              <Card>
+              <Card className="bg-white dark:bg-card">
                 <CardContent className='flex flex-col items-center justify-center py-12'>
                   <div className='text-6xl mb-4'>📡</div>
                   <h3 className='text-lg font-semibold mb-2'>Aucune source configurée</h3>
@@ -365,7 +394,7 @@ const Sources: React.FC = () => {
                     <Card
                       key={source.id}
                       className={cn(
-                        'cursor-pointer transition-all duration-200 hover:shadow-md',
+                        'cursor-pointer transition-all duration-200 hover:shadow-md bg-white dark:bg-card',
                         !source.active && 'opacity-60'
                       )}
                     >
@@ -440,7 +469,7 @@ const Sources: React.FC = () => {
 
           {/* All Articles Tab */}
           <TabsContent value='articles' className='space-y-4'>
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
                 <div className='flex items-center justify-between'>
                   <CardTitle>Tous les articles</CardTitle>
@@ -538,7 +567,7 @@ const Sources: React.FC = () => {
           {/* Manage Tab */}
           <TabsContent value='manage' className='space-y-4'>
             {/* Manual Source Addition */}
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
                 <CardTitle>Ajouter une nouvelle source</CardTitle>
               </CardHeader>
@@ -630,7 +659,7 @@ const Sources: React.FC = () => {
             </Card>
 
             {/* Predefined Sources Library */}
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
                 <CardTitle className='mb-4'>Bibliothèque de sources RSS</CardTitle>
                 <div className='relative'>

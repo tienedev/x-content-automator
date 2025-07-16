@@ -1,5 +1,5 @@
 import Parser from 'rss-parser';
-import { RSSFeedResult, RSSItem, Source } from '@/types';
+import { RSSFeedResult, RSSItem, Source } from '@x-community/shared';
 
 const parser = new Parser({
   customFields: {

@@ -8,6 +8,7 @@ import { newsAnalyzer, contentCreator } from './agents';
 // Import workflows
 import { contentGenerationWorkflow } from './workflows';
 import { simpleContentGenerationWorkflow } from './workflows/simpleContentGeneration';
+import { multiContentGenerationWorkflow } from './workflows/multiContentGeneration';
 
 export const mastra = new Mastra({
   agents: {
@@ -17,6 +18,7 @@ export const mastra = new Mastra({
   workflows: {
     contentGenerationWorkflow,
     simpleContentGenerationWorkflow,
+    multiContentGenerationWorkflow,
   },
   storage: new LibSQLStore({
     url: 'file:./mastra.db',

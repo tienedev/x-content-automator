@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
 import { RSSService } from '@/services/rss/rssService';
-import { RSSFeedResult } from '@/types';
+import { RSSFeedResult } from '@x-community/shared';
 
 const rssService = RSSService.getInstance();
 

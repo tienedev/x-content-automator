@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Post, DashboardStats, PostCategory, PostStatus, Source } from '@/types';
-import RSSContentViewer from '@/components/RSSContentViewer';
+import { Post, DashboardStats, PostCategory, PostStatus, Source } from '@x-community/shared';
+import RSSContentViewer from '@/renderer/components/RSSContentViewer';
 
 const Dashboard: React.FC = () => {
   const [stats, setStats] = useState<DashboardStats>({
@@ -92,146 +92,154 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1 className='text-2xl font-bold mb-5 text-gray-900 dark:text-foreground'>Dashboard</h1>
-
-      {/* Stats Cards */}
-      <div className='grid grid-cols-2' style={{ marginBottom: '30px' }}>
-        <div className='card'>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ fontSize: '32px' }}>📊</div>
-            <div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.totalPosts}</div>
-              <div className='text-sm text-gray-500 dark:text-muted-foreground'>Posts totaux</div>
-            </div>
-          </div>
+    <div className='h-screen bg-gray-50/30 dark:bg-background'>
+      <div className='max-w-7xl mx-auto p-6'>
+        {/* Header */}
+        <div className='mb-8'>
+          <h1 className='text-3xl font-semibold text-gray-900 dark:text-foreground'>Dashboard</h1>
+          <p className='text-gray-600 dark:text-muted-foreground mt-1'>
+            Vue d'ensemble de votre activité et contenu
+          </p>
         </div>
 
-        <div className='card'>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ fontSize: '32px' }}>📅</div>
-            <div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.todayPosts}</div>
-              <div className='text-sm text-gray-500 dark:text-muted-foreground'>
-                Posts aujourd'hui
+        {/* Stats Cards */}
+        <div className='grid grid-cols-2' style={{ marginBottom: '30px' }}>
+          <div className='card'>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ fontSize: '32px' }}>📊</div>
+              <div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.totalPosts}</div>
+                <div className='text-sm text-gray-500 dark:text-muted-foreground'>Posts totaux</div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className='card'>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ fontSize: '32px' }}>⏳</div>
-            <div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.pendingPosts}</div>
-              <div className='text-sm text-gray-500 dark:text-muted-foreground'>
-                Posts en attente
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='card'>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ fontSize: '32px' }}>📡</div>
-            <div>
-              <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.sources}</div>
-              <div className='text-sm text-gray-500 dark:text-muted-foreground'>
-                Sources actives
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Recent Posts */}
-      <div className='card'>
-        <div className='card-header'>
-          <h2 className='card-title text-gray-900 dark:text-foreground'>Posts récents</h2>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {recentPosts.map(post => (
-            <div
-              key={post.id}
-              className='p-4 border border-gray-200 dark:border-border rounded-lg bg-gray-50 dark:bg-card'
-            >
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
-              >
-                <span>{getCategoryIcon(post.category)}</span>
-                <span className='text-xs text-gray-500 dark:text-muted-foreground capitalize'>
-                  {post.category}
-                </span>
-                <span
-                  style={{
-                    fontSize: '12px',
-                    color: getStatusColor(post.status),
-                    fontWeight: '500',
-                  }}
-                >
-                  • {post.status}
-                </span>
-              </div>
-
-              <p className='text-sm text-gray-700 dark:text-foreground mb-2'>{post.content}</p>
-
-              <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <span className='text-xs text-gray-500 dark:text-muted-foreground'>
-                  {new Date(post.createdAt).toLocaleDateString('fr-FR', {
-                    day: 'numeric',
-                    month: 'short',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </span>
-
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <button
-                    className='btn btn-outline'
-                    style={{ fontSize: '12px', padding: '4px 8px' }}
-                  >
-                    Modifier
-                  </button>
-                  <button
-                    className='btn btn-primary'
-                    style={{ fontSize: '12px', padding: '4px 8px' }}
-                  >
-                    Copier
-                  </button>
+          <div className='card'>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ fontSize: '32px' }}>📅</div>
+              <div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.todayPosts}</div>
+                <div className='text-sm text-gray-500 dark:text-muted-foreground'>
+                  Posts aujourd'hui
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {recentPosts.length === 0 && (
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '40px',
-              color: '#6b7280',
-            }}
-            className='text-gray-500 dark:text-muted-foreground'
-          >
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
-            <p className='text-gray-500 dark:text-muted-foreground'>Aucun post récent</p>
-            <p className='text-sm text-gray-500 dark:text-muted-foreground'>
-              Commencez par générer du contenu !
-            </p>
           </div>
-        )}
-      </div>
 
-      {/* Flux RSS */}
-      <div className='card' style={{ marginTop: '20px' }}>
-        <div className='card-header'>
-          <h2 className='card-title text-gray-900 dark:text-foreground'>Flux RSS actifs</h2>
+          <div className='card'>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ fontSize: '32px' }}>⏳</div>
+              <div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.pendingPosts}</div>
+                <div className='text-sm text-gray-500 dark:text-muted-foreground'>
+                  Posts en attente
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='card'>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ fontSize: '32px' }}>📡</div>
+              <div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{stats.sources}</div>
+                <div className='text-sm text-gray-500 dark:text-muted-foreground'>
+                  Sources actives
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div style={{ height: '400px' }}>
-          <RSSContentViewer sources={sources} />
+
+        {/* Recent Posts */}
+        <div className='card'>
+          <div className='card-header'>
+            <h2 className='card-title text-gray-900 dark:text-foreground'>Posts récents</h2>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {recentPosts.map(post => (
+              <div
+                key={post.id}
+                className='p-4 border border-gray-200 dark:border-border rounded-lg bg-gray-50 dark:bg-card'
+              >
+                <div
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}
+                >
+                  <span>{getCategoryIcon(post.category)}</span>
+                  <span className='text-xs text-gray-500 dark:text-muted-foreground capitalize'>
+                    {post.category}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '12px',
+                      color: getStatusColor(post.status),
+                      fontWeight: '500',
+                    }}
+                  >
+                    • {post.status}
+                  </span>
+                </div>
+
+                <p className='text-sm text-gray-700 dark:text-foreground mb-2'>{post.content}</p>
+
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
+                  <span className='text-xs text-gray-500 dark:text-muted-foreground'>
+                    {new Date(post.createdAt).toLocaleDateString('fr-FR', {
+                      day: 'numeric',
+                      month: 'short',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </span>
+
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      className='btn btn-outline'
+                      style={{ fontSize: '12px', padding: '4px 8px' }}
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      className='btn btn-primary'
+                      style={{ fontSize: '12px', padding: '4px 8px' }}
+                    >
+                      Copier
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {recentPosts.length === 0 && (
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '40px',
+                color: '#6b7280',
+              }}
+              className='text-gray-500 dark:text-muted-foreground'
+            >
+              <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
+              <p className='text-gray-500 dark:text-muted-foreground'>Aucun post récent</p>
+              <p className='text-sm text-gray-500 dark:text-muted-foreground'>
+                Commencez par générer du contenu !
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Flux RSS */}
+        <div className='card' style={{ marginTop: '20px' }}>
+          <div className='card-header'>
+            <h2 className='card-title text-gray-900 dark:text-foreground'>Flux RSS actifs</h2>
+          </div>
+          <div style={{ height: '400px' }}>
+            <RSSContentViewer sources={sources} />
+          </div>
         </div>
       </div>
     </div>

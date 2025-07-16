@@ -1,7 +1,7 @@
-import { Source, FeedCategoryType } from '@/types';
+import { Source, PostCategory } from '@x-community/shared';
 
 export interface FeedCategory {
-  id: FeedCategoryType;
+  id: PostCategory;
   name: string;
   description: string;
   feeds: Omit<Source, 'id' | 'active' | 'lastUpdate'>[];
@@ -9,10 +9,11 @@ export interface FeedCategory {
 
 export const DEFAULT_RSS_CATEGORIES: FeedCategory[] = [
   {
-    id: 'tech-news',
-    name: 'Tech News',
-    description: 'Actualités technologiques et innovation',
+    id: 'tech',
+    name: 'Tech',
+    description: 'Actualités technologiques, développement et innovation',
     feeds: [
+      // Tech News
       {
         name: 'TechCrunch',
         url: 'https://techcrunch.com/feed/',
@@ -41,48 +42,14 @@ export const DEFAULT_RSS_CATEGORIES: FeedCategory[] = [
         category: 'tech',
         feedCategory: 'tech-news',
       },
-    ],
-  },
-  {
-    id: 'startup',
-    name: 'Startup & Entrepreneuriat',
-    description: 'Actualités startup, entrepreneuriat et business',
-    feeds: [
       {
         name: 'Hacker News',
         url: 'https://news.ycombinator.com/rss',
         type: 'rss',
-        category: 'business',
-        feedCategory: 'startup',
+        category: 'tech',
+        feedCategory: 'tech-news',
       },
-      {
-        name: 'TechCrunch Startups',
-        url: 'https://techcrunch.com/startups/feed/',
-        type: 'rss',
-        category: 'business',
-        feedCategory: 'startup',
-      },
-      {
-        name: 'Steve Blank',
-        url: 'https://steveblank.com/feed/',
-        type: 'rss',
-        category: 'business',
-        feedCategory: 'startup',
-      },
-      {
-        name: 'Andrew Chen',
-        url: 'https://andrewchen.co/feed/',
-        type: 'rss',
-        category: 'business',
-        feedCategory: 'startup',
-      },
-    ],
-  },
-  {
-    id: 'engineering',
-    name: 'Engineering & Dev',
-    description: "Blogs d'ingénierie et développement",
-    feeds: [
+      // Engineering & Development
       {
         name: 'The Pragmatic Engineer',
         url: 'https://blog.pragmaticengineer.com/rss/',
@@ -125,13 +92,7 @@ export const DEFAULT_RSS_CATEGORIES: FeedCategory[] = [
         category: 'tech',
         feedCategory: 'engineering',
       },
-    ],
-  },
-  {
-    id: 'ai-ml',
-    name: 'IA & Machine Learning',
-    description: 'Intelligence artificielle et machine learning',
-    feeds: [
+      // AI & ML
       {
         name: 'DeepMind',
         url: 'https://deepmind.com/blog/feed/basic/',
@@ -167,13 +128,7 @@ export const DEFAULT_RSS_CATEGORIES: FeedCategory[] = [
         category: 'tech',
         feedCategory: 'ai-ml',
       },
-    ],
-  },
-  {
-    id: 'design-ux',
-    name: 'Design & UX',
-    description: 'Design, UX et interfaces utilisateur',
-    feeds: [
+      // Design & UX
       {
         name: 'UX Planet',
         url: 'https://uxplanet.org/feed',
@@ -209,69 +164,7 @@ export const DEFAULT_RSS_CATEGORIES: FeedCategory[] = [
         category: 'tech',
         feedCategory: 'design-ux',
       },
-    ],
-  },
-  {
-    id: 'marketing',
-    name: 'Marketing & Growth',
-    description: 'Marketing digital et stratégies de croissance',
-    feeds: [
-      {
-        name: 'Seth Godin',
-        url: 'https://seths.blog/feed/',
-        type: 'rss',
-        category: 'business',
-        feedCategory: 'marketing',
-      },
-      {
-        name: 'HubSpot Marketing',
-        url: 'https://blog.hubspot.com/marketing/rss.xml',
-        type: 'rss',
-        category: 'business',
-        feedCategory: 'marketing',
-      },
-      {
-        name: 'Moz Blog',
-        url: 'https://moz.com/blog/feed',
-        type: 'rss',
-        category: 'business',
-        feedCategory: 'marketing',
-      },
-    ],
-  },
-  {
-    id: 'learning',
-    name: 'Apprentissage & Développement Personnel',
-    description: 'Apprentissage, productivité et développement personnel',
-    feeds: [
-      {
-        name: 'Farnam Street',
-        url: 'https://fs.blog/feed/',
-        type: 'rss',
-        category: 'personal',
-        feedCategory: 'learning',
-      },
-      {
-        name: 'Ness Labs',
-        url: 'https://nesslabs.com/feed',
-        type: 'rss',
-        category: 'personal',
-        feedCategory: 'learning',
-      },
-      {
-        name: 'Big Think',
-        url: 'https://bigthink.com/feed/',
-        type: 'rss',
-        category: 'personal',
-        feedCategory: 'learning',
-      },
-    ],
-  },
-  {
-    id: 'science',
-    name: 'Science & Innovation',
-    description: 'Sciences, recherche et innovation',
-    feeds: [
+      // Science & Innovation
       {
         name: 'Quanta Magazine',
         url: 'https://www.quantamagazine.org/feed/',
@@ -306,6 +199,86 @@ export const DEFAULT_RSS_CATEGORIES: FeedCategory[] = [
         type: 'rss',
         category: 'tech',
         feedCategory: 'science',
+      },
+    ],
+  },
+  {
+    id: 'business',
+    name: 'Business',
+    description: 'Startup, entrepreneuriat, marketing et business',
+    feeds: [
+      // Startup & Entrepreneuriat
+      {
+        name: 'TechCrunch Startups',
+        url: 'https://techcrunch.com/startups/feed/',
+        type: 'rss',
+        category: 'business',
+        feedCategory: 'startup',
+      },
+      {
+        name: 'Steve Blank',
+        url: 'https://steveblank.com/feed/',
+        type: 'rss',
+        category: 'business',
+        feedCategory: 'startup',
+      },
+      {
+        name: 'Andrew Chen',
+        url: 'https://andrewchen.co/feed/',
+        type: 'rss',
+        category: 'business',
+        feedCategory: 'startup',
+      },
+      // Marketing & Growth
+      {
+        name: 'Seth Godin',
+        url: 'https://seths.blog/feed/',
+        type: 'rss',
+        category: 'business',
+        feedCategory: 'marketing',
+      },
+      {
+        name: 'HubSpot Marketing',
+        url: 'https://blog.hubspot.com/marketing/rss.xml',
+        type: 'rss',
+        category: 'business',
+        feedCategory: 'marketing',
+      },
+      {
+        name: 'Moz Blog',
+        url: 'https://moz.com/blog/feed',
+        type: 'rss',
+        category: 'business',
+        feedCategory: 'marketing',
+      },
+    ],
+  },
+  {
+    id: 'personal',
+    name: 'Personnel',
+    description: 'Développement personnel, apprentissage et productivité',
+    feeds: [
+      // Learning & Development
+      {
+        name: 'Farnam Street',
+        url: 'https://fs.blog/feed/',
+        type: 'rss',
+        category: 'personal',
+        feedCategory: 'learning',
+      },
+      {
+        name: 'Ness Labs',
+        url: 'https://nesslabs.com/feed',
+        type: 'rss',
+        category: 'personal',
+        feedCategory: 'learning',
+      },
+      {
+        name: 'Big Think',
+        url: 'https://bigthink.com/feed/',
+        type: 'rss',
+        category: 'personal',
+        feedCategory: 'learning',
       },
     ],
   },

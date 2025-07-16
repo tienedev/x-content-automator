@@ -1,6 +1,7 @@
 import { ipcMain, clipboard, shell, app } from 'electron';
 import { registerRSSHandlers } from './rssHandlers';
 import { registerStorageHandlers } from './storageHandlers';
+import { registerScrapingHandlers } from './scrapingHandlers';
 
 export function registerHandlers(): void {
   // Enregistrer les handlers RSS
@@ -8,6 +9,9 @@ export function registerHandlers(): void {
 
   // Enregistrer les handlers de stockage
   registerStorageHandlers();
+  
+  // Enregistrer les handlers de scraping
+  registerScrapingHandlers();
 
   // Clipboard
   ipcMain.handle('copy-to-clipboard', async (event, text: string): Promise<void> => {

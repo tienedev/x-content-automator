@@ -1,5 +1,5 @@
 import { Conf } from 'electron-conf/main';
-import { Source, AppSettings, StoredFeedItem } from '@/types';
+import { Source, AppSettings, StoredFeedItem } from '@x-community/shared';
 import { DEFAULT_RSS_CATEGORIES, FeedCategory } from '@/config/rssFeeds';
 
 interface StoreSchema {
@@ -7,11 +7,6 @@ interface StoreSchema {
   settings: AppSettings;
   categories: FeedCategory[];
   feedItems: StoredFeedItem[];
-  userPreferences: {
-    selectedCategories: string[];
-    autoSync: boolean;
-    lastSync: string;
-  };
 }
 
 const defaultSettings: AppSettings = {
@@ -27,18 +22,11 @@ const defaultSettings: AppSettings = {
   language: 'fr',
 };
 
-const defaultUserPreferences = {
-  selectedCategories: ['tech-news', 'startup'] as string[],
-  autoSync: true,
-  lastSync: new Date().toISOString(),
-};
-
 const defaultStoreValues: StoreSchema = {
   sources: [],
   settings: defaultSettings,
   categories: DEFAULT_RSS_CATEGORIES,
   feedItems: [],
-  userPreferences: defaultUserPreferences,
 };
 
 export class StorageService {
@@ -66,29 +54,33 @@ export class StorageService {
 
   private initializeDefaultSources(): void {
     const existingSources = this.store.get('sources');
-    if (existingSources.length === 0) {
-      // Ajouter les sources des catégories sélectionnées par défaut
-      const userPreferences = this.store.get('userPreferences');
-      const categories = this.store.get('categories');
+    const categories = this.store.get('categories');
 
-      const defaultSources: Source[] = [];
-      let sourceId = 1;
+    // Créer toutes les sources des 3 catégories principales
+    const defaultSources: Source[] = [];
+    let sourceId = Date.now();
 
-      categories.forEach(category => {
-        if (userPreferences.selectedCategories.includes(category.id)) {
-          category.feeds.forEach(feed => {
-            defaultSources.push({
-              id: sourceId.toString(),
-              ...feed,
-              active: true,
-              lastUpdate: new Date().toISOString(),
-            });
-            sourceId++;
+    categories.forEach(category => {
+      category.feeds.forEach(feed => {
+        // Vérifier si cette source n'existe pas déjà
+        const exists = existingSources.some(s => s.url === feed.url);
+        if (!exists) {
+          defaultSources.push({
+            id: sourceId.toString(),
+            ...feed,
+            active: true,
+            lastUpdate: new Date().toISOString(),
           });
+          sourceId++;
         }
       });
+    });
 
-      this.store.set('sources', defaultSources);
+    // Ajouter les nouvelles sources aux existantes
+    if (defaultSources.length > 0) {
+      const updatedSources = [...existingSources, ...defaultSources];
+      this.store.set('sources', updatedSources);
+      console.log(`✅ Ajouté ${defaultSources.length} nouvelles sources par défaut`);
     }
   }
 
@@ -180,17 +172,6 @@ export class StorageService {
     const currentSettings = this.getSettings();
     const updatedSettings = { ...currentSettings, ...settings };
     this.store.set('settings', updatedSettings);
-  }
-
-  // Préférences utilisateur
-  getUserPreferences() {
-    return this.store.get('userPreferences');
-  }
-
-  updateUserPreferences(preferences: Partial<StoreSchema['userPreferences']>): void {
-    const current = this.getUserPreferences();
-    const updatedPreferences = { ...current, ...preferences };
-    this.store.set('userPreferences', updatedPreferences);
   }
 
   // Utilitaires

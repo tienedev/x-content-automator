@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { AppSettings, PostCategory } from '@x-community/shared';
-import { Card, CardContent, CardHeader, CardTitle, Button } from '@x-community/ui';
-import { Save, RotateCcw } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@x-community/ui';
 import { useToastContext } from '@/contexts/ToastContext';
 import { useThemeContext } from '@/contexts/ThemeContext';
 
@@ -26,7 +25,6 @@ const Settings: React.FC = () => {
     autoCollectContent: false,
   });
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     loadSettings();
@@ -47,45 +45,31 @@ const Settings: React.FC = () => {
     key: K,
     value: AppSettings[K]
   ): void => {
-    setSettings(prev => ({
-      ...prev,
+    const newSettings = {
+      ...settings,
       [key]: value,
-    }));
+    };
+    
+    setSettings(newSettings);
 
     // Appliquer immédiatement le changement de thème
     if (key === 'theme') {
       setTheme(value as 'light' | 'dark' | 'auto');
     }
+
+    // Sauvegarde en temps réel
+    saveSettingsRealTime(newSettings);
   };
 
-  const handleSave = async (): Promise<void> => {
-    setSaving(true);
+  const saveSettingsRealTime = async (newSettings: AppSettings): Promise<void> => {
     try {
-      await window.electronAPI.storage.updateSettings(settings);
-      success('Paramètres sauvegardés', 'Vos préférences ont été mises à jour avec succès');
+      await window.electronAPI.storage.updateSettings(newSettings);
     } catch (err) {
-      console.error('Erreur lors de la sauvegarde des paramètres:', err);
-      error('Erreur de sauvegarde', 'Impossible de sauvegarder les paramètres');
-    } finally {
-      setSaving(false);
+      console.error('Erreur lors de la sauvegarde automatique:', err);
+      error('Erreur', 'Impossible de sauvegarder automatiquement les paramètres');
     }
   };
 
-  const handleReset = (): void => {
-    setSettings({
-      defaultCategory: 'tech' as PostCategory,
-      includeHashtags: true,
-      threadFormat: false,
-      rssUpdateInterval: 60,
-      maxPostsPerDay: 5,
-      theme: 'light' as 'light' | 'dark' | 'auto',
-      notifications: true,
-      autoSave: true,
-      language: 'fr' as 'fr' | 'en',
-      autoCollectContent: false,
-    });
-    success('Paramètres réinitialisés', 'Les valeurs par défaut ont été restaurées');
-  };
 
   if (loading) {
     return (
@@ -110,57 +94,9 @@ const Settings: React.FC = () => {
         </div>
 
         <div className='space-y-6'>
-          {/* Intelligence Artificielle */}
-          <Card>
-            <CardHeader>
-              <CardTitle className='flex items-center gap-2'>
-                🤖 Intelligence Artificielle
-              </CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800'>
-                <div className='flex items-start gap-3'>
-                  <div className='text-blue-600 dark:text-blue-400 mt-0.5'>📝</div>
-                  <div>
-                    <h4 className='text-sm font-medium text-blue-900 dark:text-blue-100 mb-1'>
-                      Configuration IA
-                    </h4>
-                    <p className='text-xs text-blue-800 dark:text-blue-200'>
-                      Les clés API sont maintenant configurées directement dans le fichier{' '}
-                      <code>.env</code> du projet.
-                      <br />
-                      Copiez <code>.env.example</code> vers <code>.env</code> et ajoutez vos clés
-                      API.
-                      <br />
-                      Consultez <code>API_SETUP.md</code> pour des instructions détaillées.
-                    </p>
-                    <div className='mt-2 text-xs font-mono text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/50 p-2 rounded'>
-                      OPENAI_API_KEY=votre_clé_ici
-                      <br />
-                      GEMINI_API_KEY=votre_clé_ici
-                    </div>
-                    <div className='mt-2'>
-                      <button
-                        className='text-xs text-blue-600 dark:text-blue-400 underline hover:no-underline'
-                        onClick={() =>
-                          window.electronAPI.openExternal(
-                            'file://' +
-                              window.location.pathname.replace('/index.html', '') +
-                              '/API_SETUP.md'
-                          )
-                        }
-                      >
-                        📝 Voir le guide complet API_SETUP.md
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Sources RSS */}
-          <Card>
+          <Card className="bg-white dark:bg-card">
             <CardHeader>
               <CardTitle className='flex items-center gap-2'>📡 Sources RSS</CardTitle>
             </CardHeader>
@@ -185,7 +121,7 @@ const Settings: React.FC = () => {
           </Card>
 
           {/* Interface */}
-          <Card>
+          <Card className="bg-white dark:bg-card">
             <CardHeader>
               <CardTitle className='flex items-center gap-2'>🎨 Interface & Préférences</CardTitle>
             </CardHeader>
@@ -234,17 +170,6 @@ const Settings: React.FC = () => {
             </CardContent>
           </Card>
 
-          {/* Actions */}
-          <div className='flex justify-end gap-3'>
-            <Button variant='outline' onClick={handleReset} disabled={saving}>
-              <RotateCcw className='h-4 w-4 mr-2' />
-              Réinitialiser
-            </Button>
-            <Button onClick={handleSave} disabled={saving}>
-              <Save className='h-4 w-4 mr-2' />
-              {saving ? 'Sauvegarde...' : 'Sauvegarder'}
-            </Button>
-          </div>
         </div>
       </div>
     </div>

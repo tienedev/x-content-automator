@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FeedCategory, Source } from '@/types';
+import { FeedCategory, Source } from '@x-community/shared';
 
 interface SourceCategoryManagerProps {
   onSourcesAdded: () => void;

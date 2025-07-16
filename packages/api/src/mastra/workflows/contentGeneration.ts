@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { newsAnalyzer } from '../agents/newsAnalyzer';
 import { contentCreator } from '../agents/contentCreator';
 import { analyzeViralPotential } from '../tools/newsScoring';
-import { generateContentVariations } from '../tools/contentVariation';
 
 // Step 1: Analyser les news RSS pour identifier le potentiel viral
 const analyzeNewsStep = createStep({
@@ -157,21 +156,31 @@ const generateVariationsStep = createStep({
   execute: async ({ inputData }) => {
     const { selectedNews } = inputData;
 
-    // Utilise le tool pour générer des variations
-    // Utilise le tool directement
-    const variationResult = await generateContentVariations.execute({
-      context: {
-        newsItem: {
-          ...selectedNews,
-          engagementAngle: extractFromAnalysis(selectedNews.analysis, 'angle'),
-          emotionalApproach: extractFromAnalysis(selectedNews.analysis, 'emotion'),
-          suggestedHotTake: extractFromAnalysis(selectedNews.analysis, 'hottake'),
-        },
-        postFormat: selectedNews.recommendedFormat,
-      },
-      runtimeContext: new RuntimeContext(),
-    });
-    const { variations } = variationResult;
+    // Utilise directement l'agent ContentCreator pour générer des variations
+    const prompt = `
+Écris 3 variations de posts X/Twitter sur cette actualité:
+
+TITRE: ${selectedNews.title}
+DESCRIPTION: ${selectedNews.description}
+FORMAT RECOMMANDÉ: ${selectedNews.recommendedFormat}
+ANALYSE: ${selectedNews.analysis}
+
+Pour chaque variation:
+1. Utilise un style différent (direct, anecdote, question)
+2. Reste sous 280 caractères
+3. Ajoute 2-3 hashtags
+4. Assure-toi que ça sonne naturel et humain
+
+Format de réponse:
+VARIATION 1: [post]
+VARIATION 2: [post]  
+VARIATION 3: [post]
+    `;
+
+    const { text } = await contentCreator.generate([{ role: 'user', content: prompt }]);
+
+    // Parse les variations
+    const variations = parseVariations(text, selectedNews.recommendedFormat);
 
     return {
       newsContext: {
@@ -337,6 +346,42 @@ function extractFromAnalysis(analysis: string, type: 'angle' | 'emotion' | 'hott
         'Une perspective unique sur cette actualité'
       );
   }
+}
+
+function parseVariations(
+  text: string,
+  format: string
+): Array<{
+  content: string;
+  format: string;
+  tone: string;
+  estimatedEngagement: 'high' | 'medium' | 'low';
+  hashtags: string[];
+}> {
+  const variations = [];
+  const lines = text.split('\n').filter(l => l.trim());
+
+  const variationTexts = lines
+    .filter(line => line.includes('VARIATION') || (line.length > 20 && line.length < 300))
+    .slice(0, 3);
+
+  for (let i = 0; i < Math.max(variationTexts.length, 1); i++) {
+    const content = variationTexts[i] || text.substring(0, 280);
+    const cleanContent = content.replace(/^VARIATION \d+:\s*/, '').trim();
+
+    // Extraire hashtags
+    const hashtags = cleanContent.match(/#[\w]+/g) || [];
+
+    variations.push({
+      content: cleanContent,
+      format: format,
+      tone: i === 0 ? 'direct' : i === 1 ? 'personnel' : 'question',
+      estimatedEngagement: i === 0 ? ('high' as const) : ('medium' as const),
+      hashtags: hashtags.slice(0, 3),
+    });
+  }
+
+  return variations;
 }
 
 function parseContentCreatorResponse(text: string): {

@@ -4,7 +4,7 @@ export interface ToastData {
   id: string;
   title?: string;
   description?: string;
-  variant?: 'default' | 'destructive' | 'success' | 'warning';
+  variant?: 'default' | 'destructive';
 }
 
 export const useToast = () => {
@@ -31,11 +31,11 @@ export const useToast = () => {
     toast,
     removeToast,
     success: (title: string, description?: string) =>
-      toast({ title, description, variant: 'success' }),
+      toast({ title, description, variant: 'default' }),
     error: (title: string, description?: string) =>
       toast({ title, description, variant: 'destructive' }),
     warning: (title: string, description?: string) =>
-      toast({ title, description, variant: 'warning' }),
+      toast({ title, description, variant: 'destructive' }),
     info: (title: string, description?: string) =>
       toast({ title, description, variant: 'default' }),
   };

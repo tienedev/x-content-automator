@@ -1,5 +1,25 @@
-import { PostCategory, FeedCategoryType } from '@/types';
+import { PostCategory, FeedCategoryType } from '@x-community/shared';
 
+// Catégories principales simplifiées
+export const POST_CATEGORY_LABELS: Record<PostCategory, string> = {
+  tech: 'Tech',
+  business: 'Business',
+  personal: 'Personnel',
+};
+
+export const POST_CATEGORY_ICONS: Record<PostCategory, string> = {
+  tech: '💻',
+  business: '💼',
+  personal: '👤',
+};
+
+export const POST_CATEGORY_DESCRIPTIONS: Record<PostCategory, string> = {
+  tech: 'Actualités technologiques, développement et innovation',
+  business: 'Startup, entrepreneuriat, marketing et business',
+  personal: 'Développement personnel, apprentissage et productivité',
+};
+
+// Mapping des sous-catégories vers les catégories principales
 export const FEED_CATEGORY_LABELS: Record<FeedCategoryType, string> = {
   'tech-news': 'Tech News',
   startup: 'Startup & Entrepreneuriat',
@@ -32,16 +52,4 @@ export const FEED_TO_POST_CATEGORY: Record<FeedCategoryType, PostCategory> = {
   marketing: 'business',
   learning: 'personal',
   science: 'tech',
-};
-
-export const POST_CATEGORY_LABELS: Record<PostCategory, string> = {
-  tech: 'Tech',
-  business: 'Business',
-  personal: 'Personnel',
-};
-
-export const POST_CATEGORY_ICONS: Record<PostCategory, string> = {
-  tech: '💻',
-  business: '💼',
-  personal: '👤',
 };

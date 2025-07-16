@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RSSFeedResult, RSSItem, Source } from '@/types';
+import { RSSFeedResult, RSSItem, Source } from '@x-community/shared';
 import { useRSS } from '@/hooks/useRSS';
 
 interface RSSContentViewerProps {

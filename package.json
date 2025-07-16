@@ -40,5 +40,9 @@
     "prettier": "^3.6.2",
     "turbo": "^2.4.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.35",
+    "cheerio": "^1.1.0"
   }
 }

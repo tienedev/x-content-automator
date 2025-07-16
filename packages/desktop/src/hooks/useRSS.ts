@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { RSSFeedResult, Source } from '@/types';
+import { RSSFeedResult, Source } from '@x-community/shared';
 
 export const useRSS = () => {
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { StoredFeedItem } from '@/types';
+import { StoredFeedItem } from '@x-community/shared';
 import { useRSS } from './useRSS';
 
 export interface AutoFeedUpdateStatus {

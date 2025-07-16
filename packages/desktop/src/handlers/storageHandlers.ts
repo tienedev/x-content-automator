@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
 import { StorageService } from '@/services/storage/storageService';
-import { Source, AppSettings } from '@/types';
+import { Source, AppSettings } from '@x-community/shared';
 import { FeedCategory } from '@/config/rssFeeds';
 
 const storage = StorageService.getInstance();

@@ -7,6 +7,7 @@ import type { TabItem } from '@x-community/shared';
 import { ToastProvider } from '@/contexts/ToastContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { ToasterWrapper } from './components/ToasterWrapper';
+import { FeedLoader } from './components/FeedLoader';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
@@ -36,12 +37,15 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <ToastProvider>
+        <FeedLoader />
         <div style={{ display: 'flex', height: '100vh' }}>
           {/* Sidebar */}
-          <div className='sidebar w-64 bg-slate-800 dark:bg-card p-5 text-white dark:text-foreground border-r dark:border-border transition-colors duration-200'>
-            <div className='text-xl font-bold mb-8 text-center'>X Community Manager</div>
+          <div className='sidebar w-64 bg-slate-800 dark:bg-card text-white dark:text-foreground border-r dark:border-border transition-colors duration-200 flex flex-col'>
+            <div className='text-xl font-bold p-5 text-center border-b border-slate-700 dark:border-border'>
+              X Community Manager
+            </div>
 
-            <nav>
+            <nav className='flex-1 p-5 overflow-hidden'>
               {tabs.map(tab => (
                 <button
                   key={tab.id}

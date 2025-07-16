@@ -1,16 +1,15 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import { ElectronAPI } from '@/types';
+import type { ElectronAPI } from '../types/electron';
+import type {
+  ContentGenerationRequest,
+  Source,
+  AppSettings,
+  StoredFeedItem,
+} from '@x-community/shared';
 
 const electronAPI: ElectronAPI = {
   // Content operations
   generateContent: request => ipcRenderer.invoke('generate-content', request),
-
-  // Mastra operations
-  mastra: {
-    startServer: () => ipcRenderer.invoke('mastra:start-server'),
-    serverStatus: () => ipcRenderer.invoke('mastra:server-status'),
-    stopServer: () => ipcRenderer.invoke('mastra:stop-server'),
-  },
 
   // RSS operations
   fetchRSSFeeds: urls => ipcRenderer.invoke('fetch-rss-feeds', urls),
@@ -25,6 +24,9 @@ const electronAPI: ElectronAPI = {
   // App operations
   getVersion: () => ipcRenderer.invoke('get-version'),
   openExternal: url => ipcRenderer.invoke('open-external', url),
+  
+  // Article scraping
+  scrapeArticle: url => ipcRenderer.invoke('scrape:article', url),
 
   // Storage operations
   storage: {
